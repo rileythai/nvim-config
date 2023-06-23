@@ -85,4 +85,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
 })
--- Add any additional autocmds here
+
+-- Auto format on save
+vim.cmd([[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]])
