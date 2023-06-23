@@ -4,7 +4,10 @@ local npairs = require("nvim-autopairs")
 
 npairs.setup({ map_bs = false, map_cr = false })
 
-vim.g.coq_settings = { keymap = { recommended = false } }
+vim.g.coq_settings = { keymap = {
+  recommended = false,
+  jump_to_mark = "<F2>",
+} }
 
 -- these mappings are coq recommended mappings unrelated to nvim-autopairs
 remap("i", "<esc>", [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true, noremap = true })

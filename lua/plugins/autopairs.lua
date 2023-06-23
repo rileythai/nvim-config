@@ -1,3 +1,7 @@
+-- currently disabled
+if true then return {} end
+
+
 return {
   -- disable stupid mini autopairs
   { "echasnovski/mini.surround", enabled = false },
