@@ -12,6 +12,7 @@ return {
   -- load coq
   {
     "ms-jpq/coq.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = { "ms-jpq/coq.artifacts", "ms-jpq/coq.thirdparty" },
     init = function()
       vim.g.coq_settings.auto_start = "shut-up"

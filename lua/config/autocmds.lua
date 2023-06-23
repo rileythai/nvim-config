@@ -86,5 +86,13 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
+-- Automatically enable wrap on .txt, .md, & nofiletype
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "text", "markdown" },
+  callback = function()
+    vim.opt_local.wrap = true
+  end,
+})
+
 -- Auto format on save
 vim.cmd([[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]])

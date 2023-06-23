@@ -4,7 +4,7 @@ return {
     "akinsho/toggleterm.nvim",
     version = "*",
     config = {
-      size = 13,
+      size = 14,
       open_mapping = [[<c-/>]],
       shade_filetypes = {},
       shade_terminals = true,
@@ -12,7 +12,7 @@ return {
       start_in_insert = true,
       persist_size = true,
       persist_mode = true,
-      direction = "float",
+      direction = "horizontal",
       float_opts = {
         border = "double",
       },
