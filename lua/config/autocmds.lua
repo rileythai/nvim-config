@@ -96,3 +96,10 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 -- Auto format on save
 vim.cmd([[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]])
+
+-- Start COQ on entry
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+  callback = function()
+    vim.cmd("COQnow --shut-up")
+  end,
+})
