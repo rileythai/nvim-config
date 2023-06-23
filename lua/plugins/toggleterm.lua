@@ -15,6 +15,7 @@ return {
       direction = "horizontal",
       float_opts = {
         border = "double",
+        height = 50,
       },
     },
   },
