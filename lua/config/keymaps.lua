@@ -83,6 +83,7 @@ map("i", ".", ".<c-g>u")
 map("i", ";", ";<c-g>u")
 
 -- save file
+map("n", "<leader>cn", "<cmd>NullLsInfo<cr>", { desc = "Null-LS info" })
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 
 -- better indenting
@@ -164,8 +165,6 @@ map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 -- Add any additional keymaps here
 
 -- Terminal run commands
---local termrun = function(args) Util.float_term(args, {cwd = Util.get_root()}) end
-
 -- python run file
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "python",
@@ -173,5 +172,25 @@ vim.api.nvim_create_autocmd("FileType", {
     map('n', '<leader>r', "<cmd>w<cr><cmd>TermExec cmd='/usr/bin/env python3 %'<cr>", {desc = "Run Python file", buffer = true})
     map('n', '<F5>', "<cmd>w<cr><cmd>TermExec cmd='/usr/bin/env python3 %'<cr>", {desc = "Run Python file", buffer = true})
     map('i', '<F5>', "<esc><cmd>w<cr><cmd>TermExec cmd='/usr/bin/env python3 %'<cr>", {desc = "Run Python file", buffer = true})
+  end
+})
+
+-- matlab run file
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "matlab",
+  callback = function()
+    local fn = string.sub(vim.api.nvim_exec("echo @%", true),1,-3)
+    local cmd = string.format("matlab -batch '%s'", fn)
+    map('n', '<leader>r', function()require('toggleterm').exec(cmd)end, {desc = "Run MATLAB file", buffer = true})
+    map('n', '<F5>',  function()require('toggleterm').exec(cmd)end, {desc = "Run MATLAB file", buffer = true})
+    map('i', '<F5>', function()require('toggleterm').exec(cmd)end, {desc = "Run MATLAB file", buffer = true})
+  end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "tex",
+  callback = function()
+    map('n', '<leader>r', "<cmd>w<cr><cmd>Term Exec cmd='latexmk -pv -bibtex %'<cr>", {desc = "Compile LaTeX document"})
+    map('n', '<leader>R', "<cmd>w<cr><cmd>Term Exec cmd='latexmk -pvc -bibtex %'<cr>", {desc = "Compile LaTeX doc (continuous)"})
   end
 })

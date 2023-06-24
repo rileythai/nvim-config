@@ -88,14 +88,24 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 
 -- Automatically enable wrap on .txt, .md, & nofiletype
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "text", "markdown" },
+  pattern = { "text", "markdown", "tex" },
   callback = function()
     vim.opt_local.wrap = true
   end,
 })
 
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "tex" },
+  callback = function()
+    vim.opt_local.conceallevel = 2
+  end,
+})
 -- Auto format on save
-vim.cmd([[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]])
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  callback = function()
+    vim.lsp.buf.format()
+  end,
+})
 
 -- Start COQ on entry
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
