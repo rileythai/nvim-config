@@ -12,6 +12,7 @@ return {
     dependencies = { "ms-jpq/coq.artifacts", "ms-jpq/coq.thirdparty" },
   },
 
-  --`` load third party and snipppets
-  { "ms-jpq/coq.artifacts", "ms-jpq/coq.thirdparty" },
+  -- load third party and snipppets
+  -- currently not loading because this shit is ASS
+  --{ "ms-jpq/coq.artifacts", "ms-jpq/coq.thirdparty" },
 }
