@@ -35,6 +35,8 @@ snippet beg "begin{} / end{}" bA
 \\end{$1}
 endsnippet
 
+
+
 priority 100
 snippet ... "ldots" iA
 \ldots
@@ -76,6 +78,16 @@ snippet desc "Description" b
 \begin{description}
 	\item[$1] $0
 \end{description}
+endsnippet
+
+snippet sec "Section" b
+\section{$1}
+$0
+endsnippet
+
+snippet sub "Subsection" b
+\subsection{$1}
+$0
 endsnippet
 
 snippet pac "Package" b
@@ -196,42 +208,52 @@ endsnippet
 
 context "math()"
 snippet thet "theta" iA
-{\theta} $0
+\theta $0
 endsnippet
 
 context "math()"
 snippet omeg "omega" iA
-{\omega} $0
+\omega $0
 endsnippet
 
 context "math()"
-snippet bpsi "big psi" iA
-{\psi} $0
+snippet Psi "big psi" iA
+\psi $0
 endsnippet
 
 context "math()"
-snippet lpsi "small psi" iA
-{\varpsi} $0
+snippet psi "small psi" iA
+\varpsi $0
 endsnippet
 
 context "math()"
 snippet lamb "lambda" iA
-{\beta} $0
+\lambda $0
+endsnippet
+
+context "math()"
+snippet phi "phi" iA
+\phi $0
 endsnippet
 
 context "math()"
 snippet delt "delta" iA
-{\delta} $0
+\delta $0
+endsnippet
+
+context "math()"
+snippet Delt "Big Delta" iA
+\Delta $0
 endsnippet
 
 context "math()"
 snippet alpha "alpha" iA
-{\alpha} $0
+\alpha $0
 endsnippet
 
 context "math()"
 snippet beta "beta" iA
-{\beta} $0
+\beta $0
 endsnippet
 
 context "math()"

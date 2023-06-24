@@ -38,6 +38,7 @@ opt.spelllang = { "en" }
 opt.splitbelow = true -- Put new windows below current
 opt.splitright = true -- Put new windows right of current
 opt.tabstop = 2 -- Number of spaces tabs count for
+vim.g.tex_conceal = "abdgms" -- Hide all elements in TeX documents
 opt.termguicolors = true -- True color support
 opt.timeoutlen = 300
 opt.undofile = true
