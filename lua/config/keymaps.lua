@@ -26,11 +26,29 @@ map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
 map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
 
+-- resizing splits
+map("n", "<C-Up>", require("smart-splits").resize_up, { desc = "Resize Up" })
+map("n", "<C-Down>", require("smart-splits").resize_down, { desc = "Resize Down" })
+map("n", "<C-Left>", require("smart-splits").resize_left, { desc = "Resize Left" })
+map("n", "<C-Right>", require("smart-splits").resize_right, { desc = "Resize Right" })
+
+-- moving between splits
+map("n", "<C-h>", require("smart-splits").move_cursor_left, { desc = "Go to left window", remap = true })
+map("n", "<C-j>", require("smart-splits").move_cursor_down, { desc = "Go to lower window", remap = true })
+map("n", "<C-k>", require("smart-splits").move_cursor_up, { desc = "Go to upper window", remap = true })
+map("n", "<C-l>", require("smart-splits").move_cursor_right, { desc = "Go to right window", remap = true })
+
+-- swapping buffers between windows
+map("n", "<leader><leader>h", require("smart-splits").swap_buf_left, { desc = "Swap with Buffer to left" })
+map("n", "<leader><leader>j", require("smart-splits").swap_buf_down, { desc = "Swap with Buffer below" })
+map("n", "<leader><leader>k", require("smart-splits").swap_buf_up, { desc = "Swap with Buffer above" })
+map("n", "<leader><leader>l", require("smart-splits").swap_buf_right, { desc = "Swap with Buffer to right" })
+
 -- Resize window using <ctrl> arrow keys
-map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
-map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
-map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+--map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
+--map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+--map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+--map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 -- Move Lines
 map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })

@@ -113,3 +113,17 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
     vim.cmd("COQnow --shut-up")
   end,
 })
+
+-- Kitty terminal integration for kanagawa.nvim
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = { "kanagawa", "kanagawa-dragon", "kanagawa-wave" },
+  callback = function()
+    if vim.o.background == "light" then
+      vim.fn.system("kitty +kitten themes Kanagawa_light")
+    elseif vim.o.background == "dark" then
+      vim.fn.system("kitty +kitten themes Kanagawa_dragon")
+    else
+      vim.fn.system("kitty +kitten themes Kanagawa")
+    end
+  end,
+})
