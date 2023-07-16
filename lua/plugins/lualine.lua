@@ -7,8 +7,9 @@ return {
 
     return {
       options = {
-        theme = "auto",
         globalstatus = true,
+        section_separators = "",
+        theme = "auto",
         disabled_filetypes = {
           statusline = { "dashboard", "alpha" },
           winbar = { "dashboard", "alpha", "Trouble", "neo-tree", "spectre_panel", "ToggleTerm", "lazy", "help" },
@@ -39,7 +40,14 @@ return {
               hint = icons.diagnostics.Hint,
             },
           },
-          "diff",
+          {
+            "diff",
+            symbols = {
+              added = icons.git.added,
+              modified = icons.git.modified,
+              removed = icons.git.removed,
+            },
+          },
         },
         lualine_x = {},
         lualine_y = {},
@@ -70,7 +78,14 @@ return {
               hint = icons.diagnostics.Hint,
             },
           },
-          "diff",
+          {
+            "diff",
+            symbols = {
+              added = icons.git.added,
+              modified = icons.git.modified,
+              removed = icons.git.removed,
+            },
+          },
         },
         lualine_x = {},
         lualine_y = {},

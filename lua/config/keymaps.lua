@@ -27,18 +27,18 @@ map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
 
 -- resizing splits
-map("n", "<C-Up>", require("smart-splits").resize_up, { desc = "Resize Up" })
-map("n", "<C-Down>", require("smart-splits").resize_down, { desc = "Resize Down" })
-map("n", "<C-Left>", require("smart-splits").resize_left, { desc = "Resize Left" })
-map("n", "<C-Right>", require("smart-splits").resize_right, { desc = "Resize Right" })
+map("n", "<A-Up>", require("smart-splits").resize_up, { desc = "Resize Up", remap = true })
+map("n", "<A-Down>", require("smart-splits").resize_down, { desc = "Resize Down", remap = true })
+map("n", "<A-Left>", require("smart-splits").resize_left, { desc = "Resize Left", remap = true })
+map("n", "<A-Right>", require("smart-splits").resize_right, { desc = "Resize Right", remap = true })
 
 -- moving between splits
 map("n", "<C-h>", require("smart-splits").move_cursor_left, { desc = "Go to left window", remap = true })
 map("n", "<C-j>", require("smart-splits").move_cursor_down, { desc = "Go to lower window", remap = true })
 map("n", "<C-k>", require("smart-splits").move_cursor_up, { desc = "Go to upper window", remap = true })
 map("n", "<C-l>", require("smart-splits").move_cursor_right, { desc = "Go to right window", remap = true })
-
 -- swapping buffers between windows
+
 map("n", "<leader><leader>h", require("smart-splits").swap_buf_left, { desc = "Swap with Buffer to left" })
 map("n", "<leader><leader>j", require("smart-splits").swap_buf_down, { desc = "Swap with Buffer below" })
 map("n", "<leader><leader>k", require("smart-splits").swap_buf_up, { desc = "Swap with Buffer above" })
