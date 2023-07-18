@@ -11,6 +11,7 @@ local servers = {
   "ruff_lsp",
   "arduino_language_server",
   "cssls",
+  "clangd",
 }
 
 for _, srv in ipairs(servers) do
