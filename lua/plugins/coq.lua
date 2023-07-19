@@ -9,10 +9,5 @@ return {
   -- load coq
   {
     "ms-jpq/coq.nvim",
-    dependencies = { "ms-jpq/coq.thirdparty" },
   },
-
-  -- load third party and snipppets
-  -- currently not loading the snippest
-  { "ms-jpq/coq.thirdparty" },
 }
