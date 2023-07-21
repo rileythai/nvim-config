@@ -2,4 +2,5 @@
 return {
   { "rebelot/kanagawa.nvim", config = { theme = "dragon" } },
   { "junegunn/seoul256.vim" },
+  { "shaunsingh/nord.nvim" },
 }
