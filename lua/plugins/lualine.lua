@@ -21,14 +21,14 @@ return {
         lualine_b = {
           {
             "filetype",
-            icon_only = true,
-            separator = "",
+            icon_only = { true },
+            separator = { "" },
             padding = {
               left = 1,
               right = 1,
             },
           },
-          { "filename", path = 0, symbols = { modified = "  ", readonly = "", unnamed = "" } },
+          { "filename", path = { 0 }, symbols = { modified = "  ", readonly = "", unnamed = "" } },
         },
         lualine_c = {
           {
@@ -59,14 +59,14 @@ return {
         lualine_b = {
           {
             "filetype",
-            icon_only = true,
-            separator = "",
+            icon_only = { true },
+            separator = { "" },
             padding = {
               left = 1,
               right = 1,
             },
           },
-          { "filename", path = 0, symbols = { modified = "  ", readonly = "", unnamed = "" } },
+          { "filename", path = { 0 }, symbols = { modified = "  ", readonly = "", unnamed = "" } },
         },
         lualine_c = {
           {
@@ -151,7 +151,6 @@ return {
           },
         },
         lualine_y = {
-          lualine_b = { "diagnostics", "diff" },
           { "progress", separator = " ", padding = { left = 1, right = 0 } },
           { "location", padding = { left = 0, right = 1 } },
         },
