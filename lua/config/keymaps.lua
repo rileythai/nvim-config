@@ -217,8 +217,8 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "tex",
   callback = function()
-    map('n', '<leader>r', "<cmd>w<cr><cmd>Term Exec cmd='latexmk -pv -bibtex %'<cr>", { desc = "Compile LaTeX document" })
-    map('n', '<leader>R', "<cmd>w<cr><cmd>Term Exec cmd='latexmk -pvc -bibtex %'<cr>",
+    map('n', '<leader>r', "<cmd>w<cr><cmd>TermExec cmd='latexmk -pv -bibtex %'<cr>", { desc = "Compile LaTeX document" })
+    map('n', '<leader>R', "<cmd>w<cr><cmd>TermExec cmd='latexmk -pvc -bibtex %'<cr>",
       { desc = "Compile LaTeX doc (continuous)" })
   end
 })
