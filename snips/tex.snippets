@@ -15,14 +15,11 @@ endglobal
 snippet template "Basic template" b
 \documentclass[a4paper]{article}
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+\usepackage{inputenc}
+\usepackage{fontenc}
 \usepackage{textcomp}
 \usepackage{amsmath, amssymb}
-\usepackage{derivative}
-\usepackage{braket}
 
-\pdfsuppresswarningpagegroup=1
 
 \begin{document}
 	$0
@@ -128,6 +125,14 @@ snippet ali "Align" bA
 .\end{align*}
 endsnippet
 
+context "math()"
+snippet vec "Vector" iA
+\vec{$1}$0
+endsnippet
+
+snippet '([A-Za-z])BB' "auto bold" wrA
+\\mathbf{`!p snip.rv = match.group(1)`}
+endsnippet
 
 context "math()"
 snippet // "Fraction" iA
@@ -506,7 +511,13 @@ endsnippet
 priority 300
 context "math()"
 snippet dint "integral" wA
-\int_{${1:-\infty}}^{${2:\infty}} ${3:${VISUAL}} $0
+\int_{${1:-\infty}}^{${2:\infty}} \, ${3:${VISUAL}} \, \mathrm{d}${4:x} $0
+endsnippet
+
+priority 300
+context "math()"
+snippet cint "closed integral" wA
+\oint_{${1:-\infty}} \, ${2:${VISUAL}} \, \mathrm{d}${3:x} $0
 endsnippet
 
 priority 200
@@ -692,11 +703,12 @@ endsnippet
 
 
 snippet HH "H" iA
-\mathbb{H}
+\mathbf{H}
 endsnippet
 
+
 snippet DD "D" iA
-\mathbb{D}
+\mathbf{D}
 endsnippet
 
 # vim:ft=snippets

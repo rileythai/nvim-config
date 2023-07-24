@@ -21,9 +21,9 @@ return {
   {
     "SirVer/ultisnips",
     init = function()
-      vim.g.UltiSnipsExpandTrigger = "<tab>"
-      vim.g.UltiSnipsJumpForwardTrigger = "<tab>"
-      vim.g.UltiSnipsJumpBackwardTrigger = "<S-tab>"
+      vim.g.UltiSnipsExpandTrigger = "<Tab>"
+      vim.g.UltiSnipsJumpForwardTrigger = "<Tab>"
+      vim.g.UltiSnipsJumpBackwardTrigger = "<S-Tab>"
       vim.g.UltiSnipsSnippetDirectories = { "UltiSnips", "snips" }
     end,
   },
