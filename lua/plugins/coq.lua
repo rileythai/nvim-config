@@ -1,3 +1,7 @@
+if true then
+  return {}
+end
+
 return {
   -- unload cmp et. al
   { "hrsh7th/nvim-cmp", enabled = false },

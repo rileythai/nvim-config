@@ -108,11 +108,11 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 -- Start COQ on entry
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
-  callback = function()
-    vim.cmd("COQnow --shut-up")
-  end,
-})
+--vim.api.nvim_create_autocmd({ "BufEnter" }, {
+--  callback = function()
+--    vim.cmd("COQnow --shut-up")
+--  end,
+--})
 
 -- Kitty terminal integration for kanagawa.nvim
 vim.api.nvim_create_autocmd("ColorScheme", {

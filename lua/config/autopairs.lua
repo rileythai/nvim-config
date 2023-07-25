@@ -1,3 +1,9 @@
+if true then
+  return {}
+end
+
+--
+--
 -- small amount of config to make the things work properly
 local remap = vim.api.nvim_set_keymap
 local npairs = require("nvim-autopairs")
