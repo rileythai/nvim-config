@@ -289,7 +289,7 @@ snippet rd "to the ... power" iA
 endsnippet
 
 context "math()"
-snippet '([A-Za-z])bb' "auto bold" wrA
+snippet '([A-Za-z])BB' "auto bold" wrA
 \\mathbf{`!p snip.rv = match.group(1)`}
 endsnippet
 
@@ -300,6 +300,11 @@ endsnippet
 
 snippet bf "text bold" iA
 \\textbf{$1} $0
+endsnippet
+
+context "math()"
+snippet rm "roman" iA
+\\mathrm{$1} $0
 endsnippet
 
 snippet emph "text italic" 
@@ -644,8 +649,13 @@ endsnippet
 
 #: Derivatives and integrals [[[
 context "math()"
-snippet part "d/dx" w
+snippet part "partial derivative" w
 \frac{\partial ${1:V}}{\partial ${2:x}} $0
+endsnippet
+
+context "math()"
+snippet ddx "d/dx" w
+\frac{\mathrm{d}${1:V}}{\mathrm{d}${2:x}} $0
 endsnippet
 
 priority 300
@@ -677,15 +687,19 @@ snippet OO "emptyset" iA
 endsnippet
 
 snippet RR "real" iA
-\R
+\mathbb{R}
 endsnippet
 
 snippet QQ "Q" iA
-\Q
+\mathbb{Q}
+endsnippet
+
+snippet NN "n" iA
+\mathbb{N}
 endsnippet
 
 snippet ZZ "Z" iA
-\Z
+\mathbb{Z}
 endsnippet
 
 context "math()"
@@ -700,10 +714,6 @@ endsnippet
 context "math()"
 snippet inn "in " iA
 \in 
-endsnippet
-
-snippet NN "n" iA
-\N
 endsnippet
 
 snippet Nn "cap" iA
