@@ -122,26 +122,13 @@ if not Util.has("trouble.nvim") then
   map("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 end
 
--- stylua: ignore start
--- toggle options
-map("n", "<leader>uf", require("lazyvim.plugins.lsp.format").toggle, { desc = "Toggle format on Save" })
-map("n", "<leader>us", function() Util.toggle("spell") end, { desc = "Toggle Spelling" })
-map("n", "<leader>uw", function() Util.toggle("wrap") end, { desc = "Toggle Word Wrap" })
-map("n", "<leader>ul", function()
-  Util.toggle("relativenumber", true)
-  Util.toggle("number")
-end, { desc = "Toggle Line Numbers" })
-map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
-local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
-map("n", "<leader>uc", function() Util.toggle("conceallevel", false, { 0, conceallevel }) end,
-  { desc = "Toggle Conceal" })
-
 -- lazygit
-map("n", "<leader>gg",
-  function() Util.float_term({ "lazygit" }, { cwd = Util.get_root(), esc_esc = false, ctrl_hjkl = false }) end,
-  { desc = "Lazygit (root dir)" })
-map("n", "<leader>gG", function() Util.float_term({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false }) end,
-  { desc = "Lazygit (cwd)" })
+map("n", "<leader>gg", function()
+  Util.terminal.open({ "lazygit" }, { cwd = Util.root.get(), esc_esc = false, ctrl_hjkl = false })
+end, { desc = "Lazygit (root dir)" })
+map("n", "<leader>gG", function()
+  Util.terminal.open({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false })
+end, { desc = "Lazygit (cwd)" })
 --map("n", "<leader>gg", "<cmd>TermExec cmd='lazygit && exit' direction='float' shading_factor=-10<cr>" , {desc = "LazyGit"})
 
 -- quit
@@ -153,9 +140,9 @@ if vim.fn.has("nvim-0.9.0") == 1 then
 end
 
 -- floating terminal
---local lazyterm = function() Util.float_term(nil, { cwd = Util.get_root() }) end
+--local lazyterm = function() Util.terminal.open(nil, { cwd = Util.root.get() }) end
 --map("n", "<leader>ft", lazyterm, { desc = "Terminal (root dir)" })
---map("n", "<leader>fT", function() Util.float_term() end, { desc = "Terminal (cwd)" })
+--map("n", "<leader>fT", function() Util.terminal.open() end, { desc = "Terminal (cwd)" })
 --map("n", "<c-/>", lazyterm, { desc = "Terminal (root dir)" })
 --map("n", "<c-_>", lazyterm, { desc = "which_key_ignore" })
 
@@ -185,22 +172,9 @@ map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
-
 -- Add any additional keymaps here
 
 -- Terminal run commands
--- python run file
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "python",
-  callback = function()
-    map('n', '<leader>r', "<cmd>w<cr><cmd>TermExec cmd='/usr/bin/env python3 %'<cr>",
-      { desc = "Run Python file", buffer = true })
-    map('n', '<F5>', "<cmd>w<cr><cmd>TermExec cmd='/usr/bin/env python3 %'<cr>",
-      { desc = "Run Python file", buffer = true })
-    map('i', '<F5>', "<esc><cmd>w<cr><cmd>TermExec cmd='/usr/bin/env python3 %'<cr>",
-      { desc = "Run Python file", buffer = true })
-  end
-})
 
 -- matlab run file
 vim.api.nvim_create_autocmd("FileType", {
@@ -208,17 +182,32 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     local fn = string.sub(vim.api.nvim_exec("echo @%", true), 1, -3)
     local cmd = string.format("matlab -batch '%s'", fn)
-    map('n', '<leader>r', function() require('toggleterm').exec(cmd) end, { desc = "Run MATLAB file", buffer = true })
-    map('n', '<F5>', function() require('toggleterm').exec(cmd) end, { desc = "Run MATLAB file", buffer = true })
-    map('i', '<F5>', function() require('toggleterm').exec(cmd) end, { desc = "Run MATLAB file", buffer = true })
-  end
+    map("n", "<leader>r", function()
+      require("toggleterm").exec(cmd)
+    end, { desc = "Run MATLAB file", buffer = true })
+    map("n", "<F5>", function()
+      require("toggleterm").exec(cmd)
+    end, { desc = "Run MATLAB file", buffer = true })
+    map("i", "<F5>", function()
+      require("toggleterm").exec(cmd)
+    end, { desc = "Run MATLAB file", buffer = true })
+  end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "tex",
   callback = function()
-    map('n', '<leader>r', "<cmd>w<cr><cmd>TermExec cmd='latexmk -pv -bibtex %'<cr>", { desc = "Compile LaTeX document" })
-    map('n', '<leader>R', "<cmd>w<cr><cmd>TermExec cmd='latexmk -pvc -bibtex %'<cr>",
-      { desc = "Compile LaTeX doc (continuous)" })
-  end
+    map(
+      "n",
+      "<leader>r",
+      "<cmd>w<cr><cmd>TermExec cmd='latexmk -pv -bibtex %'<cr>",
+      { desc = "Compile LaTeX document" }
+    )
+    map(
+      "n",
+      "<leader>R",
+      "<cmd>w<cr><cmd>TermExec cmd='latexmk -pvc -bibtex %'<cr>",
+      { desc = "Compile LaTeX doc (continuous)" }
+    )
+  end,
 })

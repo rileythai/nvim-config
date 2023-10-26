@@ -101,18 +101,12 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 -- Auto format on save
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  callback = function()
-    vim.lsp.buf.format()
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function(args)
+    require("conform").format({ bufnr = args.buf })
   end,
 })
-
--- Start COQ on entry
---vim.api.nvim_create_autocmd({ "BufEnter" }, {
---  callback = function()
---    vim.cmd("COQnow --shut-up")
---  end,
---})
 
 -- Kitty terminal integration for kanagawa.nvim
 vim.api.nvim_create_autocmd("ColorScheme", {
