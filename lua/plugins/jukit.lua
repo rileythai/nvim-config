@@ -27,6 +27,7 @@ return {
     vim.g.jukit_mappings = 0
     vim.g.jukit_terminal = "kitty"
     vim.g.jukit_output_new_os_window = 0
+    vim.g.jukit_mpl_style = "science"
     vim.g.jukit_outhist_new_os_window = 0
   end,
 }
