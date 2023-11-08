@@ -1,9 +1,11 @@
 return {
+-- Jukit
+  {
   "luk400/vim-jukit",
   ft = "python",
 
   keys = {
-    { "<leader>p", desc = "+python" },
+    ""
     { "<leader>r", "<cmd>call jukit#send#section(0)<cr>", desc = "Run current cell" },
     { "<leader>pr", "<cmd>call jukit#splits#output()<CR>", desc = "Create iPython split & run cell" },
     { "<leader>pt", "<cmd>call jukit#splits#term()<CR>", desc = "Create iPython split" },
@@ -30,4 +32,12 @@ return {
     vim.g.jukit_mpl_style = "science"
     vim.g.jukit_outhist_new_os_window = 0
   end,
-}
+} ,
+  {
+  "folke/which-key.nvim",
+    opts  {
+      defaults = {
+        ["<leader>p"] = {name = "+python"},
+      },
+    },
+}a
