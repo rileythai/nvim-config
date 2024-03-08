@@ -201,13 +201,13 @@ vim.api.nvim_create_autocmd("FileType", {
       "n",
       "<leader>r",
       "<cmd>w<cr><cmd>TermExec cmd='latexmk -pv -bibtex %'<cr>",
-      { desc = "Compile LaTeX document" }
+      { desc = "Compile LaTeX document", remap = true }
     )
     map(
       "n",
       "<leader>R",
       "<cmd>w<cr><cmd>TermExec cmd='latexmk -pvc -bibtex %'<cr>",
-      { desc = "Compile LaTeX doc (continuous)" }
+      { desc = "Compile LaTeX doc (continuous)", remap = true }
     )
   end,
 })
