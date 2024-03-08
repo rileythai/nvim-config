@@ -1,27 +1,98 @@
+local keys = {
+  { "<leader>r", "<cmd>call jukit#send#section(0)<cr>", desc = "Run current cell", silent = false, remap = true },
+  {
+    "<leader>pr",
+    "<cmd>call jukit#splits#output()<CR>",
+    desc = "Create iPython split & run cell",
+    silent = false,
+    remap = true,
+  },
+  {
+    "<leader>ps",
+    "<cmd>call jukit#splits#term()<CR>",
+    desc = "Create iPython split",
+    silent = false,
+    remap = true,
+  },
+  {
+    "<leader>pc",
+    "<cmd>call jukit#convert#notebook_convert('jupyter-notebook')<cr>",
+    desc = "Convert to/from ipynb",
+  },
+  { "J", "<cmd>call jukit#cells#jump_to_previous_cell()CR>", silent = true, remap = true },
+  { "K", "<cmd>call jukit#cells#jump_to_next_cell()<CR>", silent = true, remap = true },
+
+  { "<leader>pd", "<cmd>call jukit#cells#delete()<CR>", desc = "Delete cell", silent = false, remap = true },
+  {
+    "<leader>px",
+    "<cmd>call jukit#splits#close_output_split()<CR>",
+    desc = "Close iPython split",
+    silent = false,
+    remap = true,
+  },
+
+  {
+    "<leader>po",
+    "<cmd>call jukit#cells#create_below(0)<CR>",
+    desc = "Create output cell below",
+    silent = false,
+    remap = true,
+  },
+  {
+    "<leader>pO",
+    "<cmd>call jukit#cells#create_above(0)<CR>",
+    desc = "Create output cell above",
+    silent = false,
+    remap = true,
+  },
+  {
+    "<leader>pt",
+    "<cmd>call jukit#cells#create_below(1)<CR>",
+    desc = "Create text cell below",
+    silent = false,
+    remap = true,
+  },
+  {
+    "<leader>pT",
+    "<cmd>call jukit#cells#create_above(1)<CR>",
+    desc = "Create text cell above",
+    silent = false,
+    remap = true,
+  },
+  { "<leader>pk", "<cmd>call jukit#cells#move_up()<CR>", desc = "Move cell up", silent = false, remap = true },
+  {
+    "<leader>pj",
+    "<cmd>call jukit#cells#move_down()<CR>",
+    desc = "Move cell down",
+    silent = false,
+    remap = true,
+  },
+  {
+    "<leader>pM",
+    "<cmd>call jukit#cells#merge_above()<CR>",
+    desc = "Merge cell with above cell",
+    silent = false,
+    remap = true,
+  },
+  {
+    "<leader>pm",
+    "<cmd>call jukit#cells#merge_below()<CR>",
+    desc = "Merge cell with below cell",
+    silent = false,
+    remap = true,
+  },
+}
+
 return {
   -- Jukit
   {
     "luk400/vim-jukit",
     ft = "python",
-
-    keys = {
-      { "<leader>r", "<cmd>call jukit#send#section(0)<cr>", desc = "Run current cell" },
-      { "<leader>pr", "<cmd>call jukit#splits#output()<CR>", desc = "Create iPython split & run cell" },
-      { "<leader>pt", "<cmd>call jukit#splits#term()<CR>", desc = "Create iPython split" },
-      {
-        "<leader>pc",
-        "<cmd>call jukit#convert#notebook_convert('jupyter-notebook')<cr>",
-        desc = "Convert to/from ipynb",
-      },
-      { "<leader>po", "<cmd>call jukit#cells#create_below(0)<CR>", desc = "Create output cell below" },
-      { "<leader>pO", "<cmd>call jukit#cells#create_above(0)<CR>", desc = "Create output cell above" },
-      { "<leader>pt", "<cmd>call jukit#cells#create_below(1)<CR>", desc = "Create text cell below" },
-      { "<leader>pT", "<cmd>call jukit#cells#create_above(1)<CR>", desc = "Create text cell above" },
-      { "<leader>pk", "<cmd>call jukit#cells#move_up()<CR>", desc = "Move cell up" },
-      { "<leader>pj", "<cmd>call jukit#cells#move_down()<CR>", desc = "Move cell down" },
-      { "<leader>pM", "<cmd>call jukit#cells#merge_above()<CR>", desc = "Merge cell with above cell" },
-      { "<leader>pm", "<cmd>call jukit#cells#merge_below()<CR>", desc = "Merge cell with below cell" },
-    },
+    config = function()
+      for index, value in ipairs(keys) do
+        vim.keymap.set("n", value[1], value[2], { desc = value.desc, silent = value.silent, remap = value.remap })
+      end
+    end,
 
     init = function()
       vim.g.jukit_inline_plotting = 1
