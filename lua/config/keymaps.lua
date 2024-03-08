@@ -101,8 +101,8 @@ map("i", ".", ".<c-g>u")
 map("i", ";", ";<c-g>u")
 
 -- save file
-map("n", "<leader>cn", "<cmd>NullLsInfo<cr>", { desc = "Null-LS info" })
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+map("n", "<leader>cF", "<cmd>ConformInfo<cr>", { desc = "Conform info" })
 
 -- better indenting
 map("v", "<", "<gv")
