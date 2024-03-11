@@ -1,12 +1,4 @@
-if true then
-  return {}
-end
-
 return {
-  -- unload luasnip and relevant dependencies
-  { "L3MON4D3/LuaSnip", enabled = false },
-  { "rafamadriz/friendly-snippets", enabled = false },
-
   -- add ultisnips
   {
     "SirVer/ultisnips",

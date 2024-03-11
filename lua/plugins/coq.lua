@@ -1,17 +1,16 @@
+-- i give up
+if true then
+  return {}
+end
+
 return {
-  -- signatures (what function vars do)
-  {
-    "ray-x/lsp_signature.nvim",
-    opts = {},
-    config = function(_, opts)
-      require("lsp_signature").setup(opts)
-    end,
-  },
-  -- the completion engine, coq (sometimes slow)-
+  -- floating context windows, signatures
+  { "ray-x/lsp_signature.nvim" },
+  -- the completion engine, coq (sometimes slow, but definitely faster than cmp)
   {
     "ms-jpq/coq_nvim",
-    event = "InsertEnter",
-    dependencies = { "L3MON4D3/LuaSnip", "" },
+    event = "BufReadPre",
+    dependencies = { "L3MON4D3/LuaSnip", "windwp/nvim-autopairs" },
     config = function()
       local lsp = require("lspconfig")
       local coq = require("coq")
@@ -21,62 +20,38 @@ return {
         "pyright",
         "texlab",
         "lua_ls",
+        "ltex",
         "matlab_ls",
-        "vale_ls",
-        "grammarly",
-        "ruff_lsp",
-        "arduino_language_server",
-        "cssls",
-        "clangd",
       }
       for _, srv in ipairs(servers) do
         lsp[srv].setup(coq.lsp_ensure_capabilities())
       end
     end,
     init = function()
-      local remap = vim.api.nvim_set_keymap
-      local npairs = require("nvim-autopairs")
-
-      npairs.setup({ map_bs = false, map_cr = false })
-
       -- all settings (any other will override this)
       vim.g.coq_settings = {
         auto_start = "shut-up",
+        display = { preview = { border = "rounded" }, icons = { mode = "short" } },
         keymap = {
           recommended = false,
           jump_to_mark = "",
+          pre_select = true,
         },
-        clients = { snippets = { enabled = false } },
+        clients = {
+          lsp = { enabled = true, short_name = "ls" },
+          buffers = { enabled = true, short_name = "b" },
+          snippets = { enabled = false },
+          tmux = { enabled = false },
+        },
       }
-
-      -- these mappings are coq recommended mappings unrelated to nvim-autopairs
-      remap("i", "<esc>", [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true, noremap = true })
-      remap("i", "<c-c>", [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]], { expr = true, noremap = true })
-
-      -- skip it, if you use another global object
-      _G.MUtils = {}
-
-      MUtils.CR = function()
-        if vim.fn.pumvisible() ~= 0 then
-          if vim.fn.complete_info({ "selected" }).selected ~= -1 then
-            return npairs.esc("<c-y>")
-          else
-            return npairs.esc("<c-e>") .. npairs.autopairs_cr()
-          end
-        else
-          return npairs.autopairs_cr()
-        end
-      end
-      remap("i", "<cr>", "v:lua.MUtils.CR()", { expr = true, noremap = true })
-
-      MUtils.BS = function()
-        if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ "mode" }).mode == "eval" then
-          return npairs.esc("<c-e>") .. npairs.autopairs_bs()
-        else
-          return npairs.autopairs_bs()
-        end
-      end
-      remap("i", "<bs>", "v:lua.MUtils.BS()", { expr = true, noremap = true })
+      vim.cmd("ino <silent><expr> <Esc>   pumvisible() ? '<C-e><Esc>' : '<Esc>'")
+      vim.cmd("ino <silent><expr> <C-c>   pumvisible() ? '<C-e><C-c>' : '<C-c>'")
+      vim.cmd("ino <silent><expr> <BS>    pumvisible() ? '<C-e><BS>'  : '<BS>' ")
+      vim.cmd(
+        "ino <silent><expr> <CR>    pumvisible() ? (complete_info().selected == -1 ? '<C-e><CR>' : '<C-y>') : '<CR>'"
+      )
+      vim.cmd("ino <silent><expr> <C-f>   pumvisible() ? '<C-n>' : '<Tab>'")
+      vim.cmd("ino <silent><expr> <C-b> pumvisible() ? '<C-p>' : '<BS>' ")
     end,
   },
   {
@@ -84,8 +59,8 @@ return {
     config = function()
       require("coq_3p")({
         { src = "nvimlua", short_name = "nLUA" },
-        { src = "vimtex", short_name = "vTEX" },
-        { src = "copilot", short_name = "COP", accept_key = "<c-f>" },
+        { src = "ultisnip", short_name = "snip" },
+        --{ src = "copilot", short_name = "COP", accept_key = "<c-f>" },
       })
     end,
   },
@@ -115,28 +90,8 @@ return {
         },
         escape = {
           enabled = false,
-          triggers = {}, ---@type table<string, ntab.trigger>
+          triggers = {},
         },
-      },
-    },
-  },
-  { "mendes-davi/coq_luasnip" },
-  {
-    "L3MON4D3/LuaSnip",
-    build = "make install_jsregexp",
-    event = "InsertEnter",
-    dependencies = { "neotab.nvim", "mendes-davi/coq_luasnip" },
-    keys = {
-      {
-        "<Tab>",
-        function()
-          return require("luasnip").jumpable(1) --
-              and "<Plug>luasnip-jump-next"
-            or "<Plug>(neotab-out)"
-        end,
-        expr = true,
-        silent = true,
-        mode = "i",
       },
     },
   },
