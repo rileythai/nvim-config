@@ -1,14 +1,60 @@
--- currently disabled in favour of COQ
---if true then
---  return {}
---end
-
 -- cmp settings
 return {
-  { "quangnguyen30192/cmp-nvim-ultisnips" },
+  { "saadparwaiz1/cmp_luasnip" },
   { "hrsh7th/cmp-nvim-lsp" },
   { "hrsh7th/cmp-buffer" },
   { "hrsh7th/cmp-path" },
+  { "rafamadriz/friendly-snippets", enabled = false },
+  {
+    "kawre/neotab.nvim",
+    event = "InsertEnter",
+    opts = {
+      tabkey = "",
+      act_as_tab = true,
+      behavior = "nested",
+      pairs = {
+        { open = "(", close = ")" },
+        { open = "[", close = "]" },
+        { open = "{", close = "}" },
+        { open = "'", close = "'" },
+        { open = '"', close = '"' },
+        { open = "`", close = "`" },
+        { open = "<", close = ">" },
+        { open = "$", close = "$" },
+      },
+      exclude = {},
+      smart_punctuators = {
+        enabled = false,
+        semicolon = {
+          enabled = false,
+          ft = { "cs", "c", "cpp", "java" },
+        },
+        escape = {
+          enabled = false,
+          triggers = {}, ---@type table<string, ntab.trigger>
+        },
+      },
+    },
+  },
+  {
+    "L3MON4D3/LuaSnip",
+    build = "make install_jsregexp",
+    event = "InsertEnter",
+    dependencies = { "neotab.nvim" },
+    keys = {
+      {
+        "<Tab>",
+        function()
+          return require("luasnip").jumpable(1) --
+              and "<Plug>luasnip-jump-next"
+            or "<Plug>(neotab-out)"
+        end,
+        expr = true,
+        silent = true,
+        mode = "i",
+      },
+    },
+  },
   {
     "hrsh7th/nvim-cmp",
     version = false, -- last release is way too old
@@ -17,7 +63,8 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      "SirVer/UltiSnips",
+      "L3MON4D3/LuaSnip",
+      --"rafamadriz/friendly-snippets",
     },
     opts = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
@@ -34,7 +81,7 @@ return {
         },
         mapping = cmp.mapping.preset.insert({
           ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-          ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+          ["<C-m>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
@@ -47,7 +94,7 @@ return {
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
-          { name = "ultisnips" },
+          { name = "luasnip" },
           { name = "buffer" },
           { name = "path" },
         }),

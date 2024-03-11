@@ -14,7 +14,6 @@ function M.get()
     M._keys =  {
       { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
       { "<leader>cl", "<cmd>LspInfo<cr>", desc = "LSP Info" },
-      { "<leader>cn", "<cmd>NullLsInfo<cr>", desc = "Null-LS Info" },
       { "[d", M.diagnostic_goto(false), desc = "Prev Diagnostic" },
       { "]e", M.diagnostic_goto(true, "ERROR"), desc = "Next Error" },
       { "[e", M.diagnostic_goto(false, "ERROR"), desc = "Prev Error" },

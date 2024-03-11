@@ -19,7 +19,7 @@ return {
       python = { "ruff_format", "yapf" },
       tex = { "latexindent" },
     },
-    format_on_save = { lsp_fallback = true, timeout_ms = 10000 },
+    --format_on_save = { lsp_fallback = true, timeout_ms = 10000 },
     -- Set the log level.
     log_level = vim.log.levels.ERROR,
   },
