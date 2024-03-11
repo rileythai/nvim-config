@@ -1,7 +1,3 @@
-if true then
-  return {}
-end
-
 local lsp = require("lspconfig")
 local coq = require("coq")
 
