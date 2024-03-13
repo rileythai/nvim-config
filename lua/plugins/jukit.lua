@@ -19,8 +19,8 @@ local keys = {
     "<cmd>call jukit#convert#notebook_convert('jupyter-notebook')<cr>",
     desc = "Convert to/from ipynb",
   },
-  { "J", "<cmd>call jukit#cells#jump_to_previous_cell()CR>", silent = true, remap = true },
-  { "K", "<cmd>call jukit#cells#jump_to_next_cell()<CR>", silent = true, remap = true },
+  { "K", "<cmd>call jukit#cells#jump_to_previous_cell()<CR>", silent = true, remap = true },
+  { "J", "<cmd>call jukit#cells#jump_to_next_cell()<CR>", silent = true, remap = true },
 
   { "<leader>pd", "<cmd>call jukit#cells#delete()<CR>", desc = "Delete cell", silent = false, remap = true },
   {
