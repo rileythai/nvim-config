@@ -37,8 +37,12 @@ map("n", "<C-h>", require("smart-splits").move_cursor_left, { desc = "Go to left
 map("n", "<C-j>", require("smart-splits").move_cursor_down, { desc = "Go to lower window", remap = true })
 map("n", "<C-k>", require("smart-splits").move_cursor_up, { desc = "Go to upper window", remap = true })
 map("n", "<C-l>", require("smart-splits").move_cursor_right, { desc = "Go to right window", remap = true })
--- swapping buffers between windows
 
+-- scroll forward/backward
+map("n", "<C-f>", "50jzz", { desc = "Scroll forward", remap = true, silent = true })
+map("n", "<C-b>", "50kzz", { desc = "Scroll forward", remap = true, silent = true })
+
+-- swapping buffers between windows
 map("n", "<leader><leader>h", require("smart-splits").swap_buf_left, { desc = "Swap with Buffer to left" })
 map("n", "<leader><leader>j", require("smart-splits").swap_buf_down, { desc = "Swap with Buffer below" })
 map("n", "<leader><leader>k", require("smart-splits").swap_buf_up, { desc = "Swap with Buffer above" })
