@@ -17,10 +17,9 @@ return {
 
       -- servers to be loaded into COQ
       local servers = {
-        "pyright",
+        "basedpyright",
         "texlab",
         "lua_ls",
-        "ltex",
         "matlab_ls",
       }
       for _, srv in ipairs(servers) do
