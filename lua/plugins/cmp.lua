@@ -11,7 +11,14 @@
 --end
 -- cmp settings
 return {
-  { "saadparwaiz1/cmp_luasnip" },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      inlay_hints = { enabled = false },
+    },
+  },
+  { "garymjr/nvim-snippets", enabled = false },
+  { "saadparwaiz1/cmp_luasnip", enabled = false },
   { "hrsh7th/cmp-nvim-lsp" },
   { "hrsh7th/cmp-buffer" },
   { "hrsh7th/cmp-path" },
