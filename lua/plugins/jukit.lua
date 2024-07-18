@@ -2,7 +2,7 @@ local keys = {
   { "<leader>r", "<cmd>call jukit#send#section(0)<cr>", desc = "Run current cell", silent = false, remap = true },
   {
     "<leader>pr",
-    "<cmd>call jukit#splits#output()<CR><cmd>call jukit#splits#history()<CR>",
+    "<cmd>call jukit#splits#output()<CR>",
     desc = "Create iPython split",
     silent = false,
     remap = true,

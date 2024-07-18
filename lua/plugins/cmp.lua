@@ -7,25 +7,25 @@
 --    { "rafamadriz/friendly-snippets", enabled = false },
 --    { "hrsh7th/nvim-cmp", enabled = false },
 --    { "L3MON4D3/LuaSnip", enablaed = false },
+--
+--  { "saadparwaiz1/cmp_luasnip" },
+--  { "hrsh7th/cmp-nvim-lsp" },
+--  { "hrsh7th/cmp-buffer" },
+--  { "hrsh7th/cmp-path" },
 --  }
 --end
 -- cmp settings
 return {
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      inlay_hints = { enabled = false },
-    },
-  },
   { "garymjr/nvim-snippets", enabled = false },
   { "saadparwaiz1/cmp_luasnip", enabled = false },
-  { "hrsh7th/cmp-nvim-lsp" },
-  { "hrsh7th/cmp-buffer" },
-  { "hrsh7th/cmp-path" },
+  --  { "hrsh7th/cmp-nvim-lsp", enabled = false },
+  --  { "hrsh7th/cmp-buffer", enabled = false },
+  --  { "hrsh7th/cmp-path", enabled = false },
   { "rafamadriz/friendly-snippets", enabled = false },
   {
     "kawre/neotab.nvim",
     event = "InsertEnter",
+    enabled = false,
     opts = {
       tabkey = "",
       act_as_tab = true,
@@ -60,17 +60,17 @@ return {
     event = "InsertEnter",
     dependencies = { "neotab.nvim" },
     keys = {
-      {
-        "<Tab>",
-        function()
-          return require("luasnip").jumpable(1) --
-              and "<Plug>luasnip-jump-next"
-            or "<Plug>(neotab-out)"
-        end,
-        expr = true,
-        silent = true,
-        mode = "i",
-      },
+      --{
+      --  "<Tab>",
+      --  function()
+      --    return require("luasnip").jumpable(1) --
+      --        and "<Plug>luasnip-jump-next"
+      --      or "<Plug>(neotab-out)"
+      --  end,
+      --  expr = true,
+      --  silent = true,
+      --  mode = "i",
+      --},
     },
   },
   {
