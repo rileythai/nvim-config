@@ -132,10 +132,11 @@ return {
   },
   {
     "folke/which-key.nvim",
-    opts = {
-      defaults = {
-        ["<leader>p"] = { name = "+python" },
-      },
-    },
+    init = function()
+      local wk = require("which-key")
+      wk.add({
+        { "<leader>p", group = "python" },
+      })
+    end,
   },
 }
