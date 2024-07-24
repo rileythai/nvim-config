@@ -27,10 +27,10 @@ map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
 
 -- resizing splits
-map("n", "<A-Up>", require("smart-splits").resize_up, { desc = "Resize Up", remap = true })
-map("n", "<A-Down>", require("smart-splits").resize_down, { desc = "Resize Down", remap = true })
-map("n", "<A-Left>", require("smart-splits").resize_left, { desc = "Resize Left", remap = true })
-map("n", "<A-Right>", require("smart-splits").resize_right, { desc = "Resize Right", remap = true })
+map("n", "<A-k>", require("smart-splits").resize_up, { desc = "Resize Up", remap = true })
+map("n", "<A-j>", require("smart-splits").resize_down, { desc = "Resize Down", remap = true })
+map("n", "<A-h>", require("smart-splits").resize_left, { desc = "Resize Left", remap = true })
+map("n", "<A-l>", require("smart-splits").resize_right, { desc = "Resize Right", remap = true })
 
 -- moving between splits
 map("n", "<C-h>", require("smart-splits").move_cursor_left, { desc = "Go to left window", remap = true })
