@@ -17,15 +17,14 @@
 -- cmp settings
 return {
   { "garymjr/nvim-snippets", enabled = false },
-  { "saadparwaiz1/cmp_luasnip", enabled = false },
-  --  { "hrsh7th/cmp-nvim-lsp", enabled = false },
-  --  { "hrsh7th/cmp-buffer", enabled = false },
-  --  { "hrsh7th/cmp-path", enabled = false },
-  { "rafamadriz/friendly-snippets", enabled = false },
+  { "saadparwaiz1/cmp_luasnip" },
+  { "hrsh7th/cmp-nvim-lsp" },
+  { "hrsh7th/cmp-buffer" },
+  { "hrsh7th/cmp-path" },
+  { "rafamadriz/friendly-snippets" },
   {
     "kawre/neotab.nvim",
     event = "InsertEnter",
-    enabled = false,
     opts = {
       tabkey = "",
       act_as_tab = true,
@@ -49,7 +48,7 @@ return {
         },
         escape = {
           enabled = false,
-          triggers = {}, ---@type table<string, ntab.trigger>
+          triggers = {},
         },
       },
     },
@@ -58,20 +57,11 @@ return {
     "L3MON4D3/LuaSnip",
     build = "make install_jsregexp",
     event = "InsertEnter",
-    dependencies = { "neotab.nvim" },
-    keys = {
-      --{
-      --  "<Tab>",
-      --  function()
-      --    return require("luasnip").jumpable(1) --
-      --        and "<Plug>luasnip-jump-next"
-      --      or "<Plug>(neotab-out)"
-      --  end,
-      --  expr = true,
-      --  silent = true,
-      --  mode = "i",
-      --},
-    },
+    dependencies = { "kawre/neotab.nvim" },
+    opts = { enable_autosnippets = true },
+    config = function()
+      require("luasnip.loaders.from_lua").lazy_load({ paths = "~/.config/nvim/snips/" })
+    end,
   },
   {
     "hrsh7th/nvim-cmp",
@@ -82,11 +72,13 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "L3MON4D3/LuaSnip",
-      --"rafamadriz/friendly-snippets",
+      "rafamadriz/friendly-snippets",
     },
     opts = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       local cmp = require("cmp")
+      local luasnip = require("luasnip")
+      local neotab = require("neotab")
       local defaults = require("cmp.config.default")()
       return {
         completion = {
@@ -109,6 +101,15 @@ return {
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
           }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ["<Tab>"] = cmp.mapping(function()
+            if luasnip.expandable() then
+              luasnip.expand()
+            elseif luasnip.jumpable(1) then
+              luasnip.jump(1)
+            else
+              neotab.tabout()
+            end
+          end),
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
