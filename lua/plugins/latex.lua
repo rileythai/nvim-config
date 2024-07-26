@@ -1,9 +1,12 @@
 return {
   {
     "iurimateus/luasnip-latex-snippets.nvim",
+    dependencies = {
+      "L3MON4D3/LuaSnip",
+      "lervag/vimtex",
+    },
     config = function()
       require("luasnip-latex-snippets").setup()
-      -- or setup({ use_treesitter = true })
       require("luasnip").config.setup({ enable_autosnippets = true })
     end,
   },
@@ -18,7 +21,10 @@ return {
     config = function()
       -- weird linting error here but this should work
       require("nvim-treesitter.configs").setup({
-        ensure_installed = { "python", "markdown" },
+        ensure_installed = { "python", "markdown", "lua", "vim", "julia" },
+        ignore_install = { "latex" },
+        sync_install = false,
+        auto_install = false,
         highlight = {
           enable = true,
           disable = { "latex" },
