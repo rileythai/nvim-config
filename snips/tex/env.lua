@@ -38,6 +38,11 @@ return {
     ]],
       { i(1), i(2), i(3), i(0) }
     ),
-    { condition = not_math_begin_line, show_condition = not_math_begin_line }
+    { condition = line_begin, show_condition = line_begin }
+  ),
+  s(
+    { trig = "rrf", dscr = "ref", snippetType = "autosnippet" },
+    fmta([[\ref{<>}<>]], { i(1), i(0) }),
+    { condition = not_math, show_condition = not_math }
   ),
 }
