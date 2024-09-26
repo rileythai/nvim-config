@@ -67,6 +67,11 @@ return {
     { condition = math, show_condition = math }
   ),
   s(
+    { trig = "rm", dscr = "math roman", priority = 100, snippetType = "autosnippet", wordTrig = true },
+    fmta([[\mathrm{<>}<>]], { i(1), i(0) }),
+    { condition = math, show_condition = math }
+  ),
+  s(
     { trig = "oint", dscr = "closed integral", priority = 100, snippetType = "autosnippet", wordTrig = true },
     fmta([[\oint_{<>}^{<>} <> \,\mathrm{d} <>]], { i(1), i(2), i(3), i(4, "x") }),
     { condition = math, show_condition = math }

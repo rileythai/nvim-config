@@ -1,18 +1,18 @@
 return {
-  "neovim/nvim-lspconfig",
-  opts = {
-    servers = {
-      basedpyright = {
-        settings = {
-          disableOrganizeImports = true,
-          basedpyright = {
-            analysis = {
-              ignore = { "*" },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        basedpyright = {
+          settings = {
+            basedpyright = {
+              analysis = {
+                typeCheckingMode = "standard",
+              },
             },
           },
         },
       },
-      ruff_lsp = {},
     },
   },
 }
