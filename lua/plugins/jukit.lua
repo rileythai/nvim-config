@@ -114,6 +114,7 @@ return {
   -- Jukit
   {
     "luk400/vim-jukit",
+    dependencies = { "folke/which-key.nvim" },
     ft = "python",
     config = function()
       for index, value in ipairs(keys) do
@@ -128,11 +129,6 @@ return {
       vim.g.jukit_output_new_os_window = 0
       vim.g.jukit_mpl_style = "science"
       vim.g.jukit_outhist_new_os_window = 0
-    end,
-  },
-  {
-    "folke/which-key.nvim",
-    init = function()
       local wk = require("which-key")
       wk.add({
         { "<leader>p", group = "python" },

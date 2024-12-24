@@ -17,13 +17,13 @@
 -- cmp settings
 return {
   { "garymjr/nvim-snippets", enabled = false },
-  { "saadparwaiz1/cmp_luasnip" },
-  { "hrsh7th/cmp-nvim-lsp" },
-  { "hrsh7th/cmp-buffer" },
-  { "hrsh7th/cmp-path" },
-  { "rafamadriz/friendly-snippets" },
+  { "saadparwaiz1/cmp_luasnip", enabled = false },
+  { "hrsh7th/cmp-nvim-lsp", enabled = false },
+  { "hrsh7th/cmp-buffer", enabled = false },
+  { "hrsh7th/cmp-path", enabled = false },
   {
     "kawre/neotab.nvim",
+    enabled = false,
     event = "InsertEnter",
     opts = {
       tabkey = "",
@@ -54,19 +54,10 @@ return {
     },
   },
   {
-    "L3MON4D3/LuaSnip",
-    build = "make install_jsregexp",
-    event = "InsertEnter",
-    dependencies = { "kawre/neotab.nvim" },
-    opts = { enable_autosnippets = true },
-    config = function()
-      require("luasnip.loaders.from_lua").lazy_load({ paths = "~/.config/nvim/snips/" })
-    end,
-  },
-  {
     "hrsh7th/nvim-cmp",
     version = false, -- last release is way too old
     event = "InsertEnter",
+    enabled = false,
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
