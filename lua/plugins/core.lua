@@ -2,7 +2,7 @@ return {
   "LazyVim/LazyVim",
   opts = {
     -- colorscheme can be a string like `catppuccin` or a function that will load the colorscheme
-    colorscheme = "rose-pine-moon",
+    colorscheme = "catppuccin-mocha",
 
     -- don't load the default settings
     defaults = {
