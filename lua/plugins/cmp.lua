@@ -61,6 +61,9 @@ return {
     opts = { enable_autosnippets = true },
     config = function()
       require("luasnip.loaders.from_lua").lazy_load({ paths = "~/.config/nvim/snips/" })
+      require("luasnip.loaders.from_vscode").load({
+        paths = { "~/.local/share/nvim/lazy/friendly-snippets" },
+      })
     end,
   },
   {
