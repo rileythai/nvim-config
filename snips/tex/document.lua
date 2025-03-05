@@ -43,7 +43,7 @@ return {
     )
   ),
   s(
-    { trig = "template", dscr = "Standard article template" },
+    { trig = "paper", dscr = "Standard paper template" },
     fmta(
       [[
         \documentclass[a4paper,10pt,twocolumn]{article}

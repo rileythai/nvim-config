@@ -57,6 +57,11 @@ return {
     { condition = math, show_condition = math }
   ),
   s(
+    { trig = "pdx", dscr = "partial derivative", priority = 100, snippetType = "autosnippet", wordTrig = true },
+    fmta([[\frac{\partial<>}{\partial<>}<>]], { i(1, "y"), i(2, "x"), i(0) }),
+    { condition = math, show_condition = math }
+  ),
+  s(
     { trig = "ddt", dscr = "derivative", priority = 100, snippetType = "autosnippet", wordTrig = true },
     fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}<>]], { i(1, "x"), i(2, "t"), i(0) }),
     { condition = math, show_condition = math }
