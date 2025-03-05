@@ -37,8 +37,8 @@ return {
           <>
     ]],
       { i(1), i(2), i(3), i(0) }
-    ),
-    { condition = line_begin, show_condition = line_begin }
+    )
+    --    { condition = line_begin, show_condition = line_begin }
   ),
   s(
     { trig = "rrf", dscr = "ref", snippetType = "autosnippet" },

@@ -43,7 +43,7 @@ return {
     )
   ),
   s(
-    { trig = "paper", dscr = "Standard paper template" },
+    { trig = "template2", dscr = "Standard paper template" },
     fmta(
       [[
         \documentclass[a4paper,10pt,twocolumn]{article}
@@ -108,8 +108,8 @@ return {
         <>
         ]],
       { i(1), i(0) }
-    ),
-    { condition = line_begin } -- set condition in the `opts` table
+    )
+    --    { condition = line_begin } -- set condition in the `opts` table
   ),
   s(
     { trig = "sub", dscr = "Subsection" },
@@ -117,7 +117,7 @@ return {
       [[\subsection{<>}
     <>]],
       { i(1), i(0) }
-    ),
-    { condition = line_begin } -- set condition in the `opts` table
+    )
+    --    { condition = line_begin } -- set condition in the `opts` table
   ),
 }

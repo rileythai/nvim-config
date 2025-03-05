@@ -6,7 +6,19 @@ return {
       { "L3MON4D3/LuaSnip", version = "v2.*" },
       "rafamadriz/friendly-snippets",
       "kawre/neotab.nvim",
+      {
+        "micangl/cmp-vimtex",
+        dependencies = {
+          {
+            "saghen/blink.compat",
+            version = "*",
+            lazy = true,
+            opts = {},
+          },
+        },
+      },
     },
+
     version = "*",
     opts = {
       ---@module 'blink.cmp'
@@ -35,7 +47,14 @@ return {
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
+        default = { "lsp", "path", "snippets", "buffer", "vimtex" },
+        providers = {
+          vimtex = {
+            name = "vimtex",
+            module = "blink.compat.source",
+            score_offset = 100,
+          },
+        },
       },
 
       -- Blink.cmp uses a Rust fuzzy matcher by default for typo resistance and significantly better performance.
@@ -100,7 +119,7 @@ return {
       local capabilities = require("blink.cmp").get_lsp_capabilities()
       ---@type MasonLspconfigSettings
       return {
-        ensure_installed = {},
+        ensure_installed = { "pylyzer", "pyright", "ruff" },
         automatic_installation = false,
         handlers = {
           -- this first function is the "default handler"
