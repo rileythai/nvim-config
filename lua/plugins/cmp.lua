@@ -1,19 +1,12 @@
---if true then
---  return {
---    { "saadparwaiz1/cmp_luasnip", enabled = false },
---    { "hrsh7th/cmp-nvim-lsp", enabled = false },
---    { "hrsh7th/cmp-buffer", enabled = false },
---    { "hrsh7th/cmp-path", enabled = false },
---    { "rafamadriz/friendly-snippets", enabled = false },
---    { "hrsh7th/nvim-cmp", enabled = false },
---    { "L3MON4D3/LuaSnip", enablaed = false },
---
---  { "saadparwaiz1/cmp_luasnip" },
---  { "hrsh7th/cmp-nvim-lsp" },
---  { "hrsh7th/cmp-buffer" },
---  { "hrsh7th/cmp-path" },
---  }
---end
+if true then
+  return {
+    { "saadparwaiz1/cmp_luasnip", enabled = false },
+    { "hrsh7th/cmp-nvim-lsp", enabled = false },
+    { "hrsh7th/cmp-buffer", enabled = false },
+    { "hrsh7th/cmp-path", enabled = false },
+    { "hrsh7th/nvim-cmp", enabled = false },
+  }
+end
 -- cmp settings
 return {
   { "garymjr/nvim-snippets", enabled = false },
@@ -22,50 +15,6 @@ return {
   { "hrsh7th/cmp-buffer" },
   { "hrsh7th/cmp-path" },
   { "rafamadriz/friendly-snippets" },
-  {
-    "kawre/neotab.nvim",
-    event = "InsertEnter",
-    opts = {
-      tabkey = "",
-      act_as_tab = true,
-      behavior = "nested",
-      pairs = {
-        { open = "(", close = ")" },
-        { open = "[", close = "]" },
-        { open = "{", close = "}" },
-        { open = "'", close = "'" },
-        { open = '"', close = '"' },
-        { open = "`", close = "`" },
-        { open = "<", close = ">" },
-        { open = "$", close = "$" },
-      },
-      exclude = {},
-      smart_punctuators = {
-        enabled = false,
-        semicolon = {
-          enabled = false,
-          ft = { "cs", "c", "cpp", "java" },
-        },
-        escape = {
-          enabled = false,
-          triggers = {},
-        },
-      },
-    },
-  },
-  {
-    "L3MON4D3/LuaSnip",
-    build = "make install_jsregexp",
-    event = "InsertEnter",
-    dependencies = { "kawre/neotab.nvim" },
-    opts = { enable_autosnippets = true },
-    config = function()
-      require("luasnip.loaders.from_lua").lazy_load({ paths = "~/.config/nvim/snips/" })
-      require("luasnip.loaders.from_vscode").load({
-        paths = { "~/.local/share/nvim/lazy/friendly-snippets" },
-      })
-    end,
-  },
   {
     "hrsh7th/nvim-cmp",
     version = false, -- last release is way too old
