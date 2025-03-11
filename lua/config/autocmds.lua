@@ -100,24 +100,14 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.opt_local.conceallevel = 2
   end,
 })
--- Auto format on save
---vim.api.nvim_create_autocmd("BufWritePre", {
---  pattern = "*",
---  callback = function(args)
---    require("conform").format({ bufnr = args.buf })
---  end,
---})
 
--- Kitty terminal integration for kanagawa.nvim
-vim.api.nvim_create_autocmd("ColorScheme", {
-  pattern = { "kanagawa", "kanagawa-dragon", "kanagawa-wave" },
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "tex" },
   callback = function()
-    if vim.o.background == "light" then
-      vim.fn.system("kitty +kitten themes Kanagawa_light")
-    elseif vim.o.background == "dark" then
-      vim.fn.system("kitty +kitten themes Kanagawa_dragon")
-    else
-      vim.fn.system("kitty +kitten themes Kanagawa")
-    end
+    -- Set folding options using Lua
+    vim.opt_local.foldmethod = "expr"
+    vim.opt_local.foldenable = true
+    vim.opt_local.foldexpr = "vimtex#fold#level(v:lnum)"
+    vim.opt_local.foldtext = "vimtex#fold#text()"
   end,
 })

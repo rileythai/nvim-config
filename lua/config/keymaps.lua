@@ -113,7 +113,7 @@ map("v", "<", "<gv")
 map("v", ">", ">gv")
 
 -- lazy
-map("n", "<leader>l", "<cmd>:Lazy<cr>", { desc = "Lazy" })
+map("n", "<leader>cl", "<cmd>:Lazy<cr>", { desc = "Lazy (plugin manager)" })
 
 -- new file
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
@@ -195,23 +195,5 @@ vim.api.nvim_create_autocmd("FileType", {
     map("i", "<F5>", function()
       require("toggleterm").exec(cmd)
     end, { desc = "Run MATLAB file", buffer = true })
-  end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "tex",
-  callback = function()
-    map(
-      "n",
-      "<leader>r",
-      "<cmd>w<cr><cmd>TermExec cmd='latexmk -pv -bibtex %'<cr>",
-      { desc = "Compile LaTeX document", remap = true }
-    )
-    map(
-      "n",
-      "<leader>R",
-      "<cmd>w<cr><cmd>TermExec cmd='latexmk -pvc -bibtex %'<cr>",
-      { desc = "Compile LaTeX doc (continuous)", remap = true }
-    )
   end,
 })
