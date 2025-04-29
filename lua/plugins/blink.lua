@@ -135,17 +135,31 @@ return {
     },
     opts = function()
       local capabilities = require("blink.cmp").get_lsp_capabilities()
+      local handlers = {
+        function(server_name) -- default automatic handlers (optional)
+          require("lspconfig")[server_name].setup({ capabilities = capabilities })
+        end,
+        -- custom handlers
+        ["pyright"] = function()
+          require("lspconfig").pyright.setup({
+            {
+              filetypes = { "python" },
+              settings = {
+                python = {
+                  diagnosticMode = "openFilesOnly",
+                  typeCheckingMode = "off",
+                },
+              },
+            },
+            capabilities = capabilities,
+          })
+        end,
+      }
       ---@type MasonLspconfigSettings
       return {
-        ensure_installed = { "pylyzer", "pyright", "ruff" },
+        ensure_installed = { "pyright", "fortls", "ruff", "julials" },
         automatic_installation = false,
-        handlers = {
-          -- this first function is the "default handler"
-          -- it applies to every language server without a "custom handler"
-          function(server_name)
-            require("lspconfig")[server_name].setup({ capabilities = capabilities })
-          end,
-        },
+        handlers = handlers,
       }
     end,
   },
