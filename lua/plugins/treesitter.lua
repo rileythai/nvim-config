@@ -1,0 +1,46 @@
+return {
+  "nvim-treesitter/nvim-treesitter",
+  branch = "main",
+  lazy = false,
+  cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
+  opts_extend = { "ensure_installed" },
+  opts = {
+    indent = { enable = true }, ---@type lazyvim.TSFeat
+    highlight = { enable = true }, ---@type lazyvim.TSFeat
+    folds = { enable = true }, ---@type lazyvim.TSFeat
+    ensure_installed = {
+      "bash",
+      "c",
+      "diff",
+      "html",
+      "javascript",
+      "julia",
+      "jsdoc",
+      "json",
+      "jsonc",
+      "lua",
+      "luadoc",
+      "luap",
+      "markdown",
+      "markdown_inline",
+      "printf",
+      "python",
+      "query",
+      "regex",
+      "rust",
+      "toml",
+      "tsx",
+      "typescript",
+      "vim",
+      "vimdoc",
+      "xml",
+      "yaml",
+    },
+    sync_install = false,
+    auto_install = false,
+    highlight = {
+      enable = true,
+      disable = { "latex" },
+    },
+  },
+}

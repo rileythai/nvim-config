@@ -2,164 +2,38 @@ return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
   opts = function()
-    local icons = require("lazyvim.config").icons
-    local Util = require("lazyvim.util")
-
     return {
       options = {
-        globalstatus = true,
-        section_separators = "",
         theme = "auto",
-        disabled_filetypes = {
-          statusline = { "dashboard", "alpha" },
-          winbar = { "dashboard", "alpha", "Trouble", "neo-tree", "spectre_panel", "ToggleTerm", "lazy", "help" },
-        },
+        component_separators = "",
+        section_separators = { left = "", right = "" },
       },
-
-      winbar = {
-        lualine_a = {},
-        lualine_b = {
-          {
-            "filetype",
-            icon_only = { true },
-            separator = { "" },
-            padding = {
-              left = 1,
-              right = 1,
-            },
-          },
-          { "filename", path = { 0 }, symbols = { modified = "  ", readonly = "", unnamed = "" } },
-        },
-        lualine_c = {
-          {
-            "diagnostics",
-            symbols = {
-              error = icons.diagnostics.Error,
-              warn = icons.diagnostics.Warn,
-              info = icons.diagnostics.Info,
-              hint = icons.diagnostics.Hint,
-            },
-          },
-          {
-            "diff",
-            symbols = {
-              added = icons.git.added,
-              modified = icons.git.modified,
-              removed = icons.git.removed,
-            },
-          },
-        },
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {},
+      disabled_filetypes = {
+        statusline = { "snacks_dashboard" },
+        winbar = { "snacks_dashboard",  "Trouble", "neo-tree", "spectre_panel", "ToggleTerm", "lazy", "help" },
       },
-
-      inactive_winbar = {
-        lualine_a = {},
-        lualine_b = {
-          {
-            "filetype",
-            icon_only = { true },
-            separator = { "" },
-            padding = {
-              left = 1,
-              right = 1,
-            },
-          },
-          { "filename", path = { 0 }, symbols = { modified = "  ", readonly = "", unnamed = "" } },
-        },
-        lualine_c = {
-          {
-            "diagnostics",
-            symbols = {
-              error = icons.diagnostics.Error,
-              warn = icons.diagnostics.Warn,
-              info = icons.diagnostics.Info,
-              hint = icons.diagnostics.Hint,
-            },
-          },
-          {
-            "diff",
-            symbols = {
-              added = icons.git.added,
-              modified = icons.git.modified,
-              removed = icons.git.removed,
-            },
-          },
-        },
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {},
-      },
-
       sections = {
-        lualine_a = { "mode" },
-        lualine_b = { "branch" },
+        lualine_a = { { "mode", separator = { left = "" }, right_padding = 2 } },
+        lualine_b = { "filename", "branch" },
         lualine_c = {
-          {
-            "diagnostics",
-            symbols = {
-              error = icons.diagnostics.Error,
-              warn = icons.diagnostics.Warn,
-              info = icons.diagnostics.Info,
-              hint = icons.diagnostics.Hint,
-            },
-          },
-          {
-            "filetype",
-            icon_only = true,
-            separator = "",
-            padding = {
-              left = 1,
-              right = 0,
-            },
-          },
-          { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
-          -- stylua: ignore
-          {
-            function() return require("nvim-navic").get_location() end,
-            cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end,
-          },
+          "%=", --[[ add your center components here in place of this comment ]]
         },
-        lualine_x = {
-          -- stylua: ignore
-          {
-            function() return require("noice").api.status.command.get() end,
-            cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-            color = Util.ui.fg("Statement"),
-          },
-          -- stylua: ignore
-          {
-            function() return require("noice").api.status.mode.get() end,
-            cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-            color = Util.ui.fg("Constant"),
-          },
-          -- stylua: ignore
-          {
-            function() return "  " .. require("dap").status() end,
-            cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
-            color = Util.ui.fg("Debug"),
-          },
-          { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = Util.ui.fg("Special") },
-          {
-            "diff",
-            symbols = {
-              added = icons.git.added,
-              modified = icons.git.modified,
-              removed = icons.git.removed,
-            },
-          },
-        },
-        lualine_y = {
-          { "progress", separator = " ", padding = { left = 1, right = 0 } },
-          { "location", padding = { left = 0, right = 1 } },
-        },
+        lualine_x = {},
+        lualine_y = { "filetype", "progress" },
         lualine_z = {
-          function()
-            return " " .. os.date("%R")
-          end,
+          { "location", separator = { right = "" }, left_padding = 2 },
         },
       },
+      inactive_sections = {
+        lualine_a = { "filename" },
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = { "location" },
+      },
+      tabline = {},
+      extensions = {},
       extensions = { "neo-tree", "lazy", "nvim-dap-ui" },
     }
   end,

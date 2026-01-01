@@ -20,7 +20,7 @@ return {
       tex = { "latexindent" },
       fortran = { "fprettify" },
     },
-    --format_on_save = { lsp_fallback = true, timeout_ms = 10000 },
+    format_on_save = { lsp_fallback = true, timeout_ms = 10000 },
     -- Set the log level.
     log_level = vim.log.levels.ERROR,
   },

@@ -4,7 +4,6 @@ return {
     -- optional: provides snippets for the snippet source
     dependencies = {
       { "L3MON4D3/LuaSnip", version = "v2.*" },
-      "rafamadriz/friendly-snippets",
       "kawre/neotab.nvim",
       {
         "micangl/cmp-vimtex",
@@ -115,52 +114,10 @@ return {
     "L3MON4D3/LuaSnip",
     build = "make install_jsregexp",
     event = "InsertEnter",
-    dependencies = { "kawre/neotab.nvim", "lervag/vimtex", "rafamadriz/friendly-snippets" },
+    dependencies = { "kawre/neotab.nvim", "lervag/vimtex" },
     opts = { enable_autosnippets = true },
     config = function()
       require("luasnip.loaders.from_lua").lazy_load({ paths = "~/.config/nvim/snips/" })
-      require("luasnip.loaders.from_vscode").load({
-        paths = { "~/.local/share/nvim/lazy/friendly-snippets" },
-        exclude = { "latex" }, -- don't want fs latex
-      })
-    end,
-  },
-  {
-    -- Automatically adds lspconfig handers for all language servers installed by mason
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = {
-      "neovim/nvim-lspconfig",
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-    },
-    opts = function()
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
-      local handlers = {
-        function(server_name) -- default automatic handlers (optional)
-          require("lspconfig")[server_name].setup({ capabilities = capabilities })
-        end,
-        -- custom handlers
-        ["pyright"] = function()
-          require("lspconfig").pyright.setup({
-            {
-              filetypes = { "python" },
-              settings = {
-                python = {
-                  diagnosticMode = "openFilesOnly",
-                  typeCheckingMode = "off",
-                },
-              },
-            },
-            capabilities = capabilities,
-          })
-        end,
-      }
-      ---@type MasonLspconfigSettings
-      return {
-        ensure_installed = { "pyright", "fortls", "ruff", "julials" },
-        automatic_installation = false,
-        handlers = handlers,
-      }
     end,
   },
 }
