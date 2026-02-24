@@ -2,7 +2,6 @@
 
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
-  ---@cast keys LazyKeysHandler
   -- do not create the keymap if a lazy keys handler exists
   if not keys.active[keys.parse({ lhs, mode = mode }).id] then
     opts = opts or {}
@@ -98,9 +97,12 @@ map("v", "<", "<gv")
 map("v", ">", ">gv")
 
 -- lazy and other plugins
-map("n", "<leader>cl", "<cmd>:Lazy<cr>", { desc = "Lazy (plugin manager)" })
+map("n", "<leader>cL", "<cmd>:Lazy<cr>", { desc = "Lazy (plugin manager)" })
 map("n", "<leader>cF", "<cmd>ConformInfo<cr>", { desc = "Conform info" })
-map("n", "<leader>e", "<cmd>Oil<cr>", { desc = "Files as buffer" })
+map("n", "<leader>ct", "<cmd>FormatToggle<cr>", { desc = "Toggle formatting" })
+map("n", "<leader>cI", "<cmd>LspInfo<cr>", { desc = "Conform info" })
+map("n", "<leader>cm", "<cmd>Mason<cr>", { desc = "Mason" })
+map("n", "<leader>cR", "<cmd>LspRestart<cr>", { desc = "Reboot LSP" })
 
 -- new file
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
@@ -110,6 +112,9 @@ map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 -- trouble
 map("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
+
+-- lsp info
+map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions", remap = true })
 
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })

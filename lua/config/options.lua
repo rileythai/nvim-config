@@ -13,6 +13,10 @@ opt.expandtab = true -- Use spaces instead of tabs
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.foldmethod = "expr" -- use expression for folding
 opt.foldexpr = "nvim_treesitter#foldexpr()" -- use Treesitter's syntax highlighting to fold
+opt.foldtext = "" -- force syntaxc highliht
+opt.foldlevel = 99 -- don't know what lest
+opt.foldlevelstart = 1 -- top level is open
+opt.foldnestmax = 4 -- max of 4 folds deep
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.ignorecase = true -- Ignore case
@@ -49,7 +53,6 @@ opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
 opt.wrap = false -- Disable line wrap
 opt.winborder = "rounded" -- rounded borders
-
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0

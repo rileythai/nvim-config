@@ -2,23 +2,22 @@ return {
   {
     "saghen/blink.cmp",
     -- optional: provides snippets for the snippet source
+    version = "*",
     dependencies = {
       { "L3MON4D3/LuaSnip", version = "v2.*" },
       "kawre/neotab.nvim",
-      {
-        "micangl/cmp-vimtex",
-        dependencies = {
-          {
-            "saghen/blink.compat",
-            version = "*",
-            lazy = true,
-            opts = {},
-          },
-        },
-      },
+      --{
+      --  "micangl/cmp-vimtex",
+      --  dependencies = {
+      --    {
+      --      "saghen/blink.compat",
+      --      version = "*",
+      --      lazy = true,
+      --      opts = {},
+      --    },
+      --  },
+      --},
     },
-
-    version = "*",
     opts = {
       ---@module 'blink.cmp'
       ---@type blink.cmp.Config
@@ -32,7 +31,21 @@ return {
             enabled = true,
           },
         },
+        menu = {
+          border = "single",
+        },
+        documentation = {
+          auto_show = true,
+          window = {
+            border = "single",
+          },
+        },
+        -- Displays a preview of the selected item on the current line
+        ghost_text = {
+          enabled = true,
+        },
       },
+      signature = { enabled = true },
       keymap = {
         preset = "enter",
         ["<Tab>"] = { "snippet_forward", "fallback" },
@@ -55,22 +68,59 @@ return {
       },
 
       appearance = {
-        -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-        use_nvim_cmp_as_default = true,
-        -- Adjusts spacing to ensure icons are aligned
-        nerd_font_variant = "normal",
+        use_nvim_cmp_as_default = true, -- Sets the fallback highlight groups to nvim-cmp's highlight groups
+        nerd_font_variant = "normal", -- Adjusts spacing to ensure icons are aligned
       },
 
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        default = { "lsp", "path", "snippets", "buffer", "vimtex" },
+        default = { "lsp", "path", "snippets", "buffer" },
         providers = {
-          vimtex = {
-            name = "vimtex",
-            module = "blink.compat.source",
-            score_offset = 100,
+          lsp = {
+            name = "lsp",
+            enabled = true,
+            module = "blink.cmp.sources.lsp",
+            score_offset = 90, -- the higher the number, the higher the priority
+            min_keyword_length = 3,
           },
+          path = {
+            name = "Path",
+            module = "blink.cmp.sources.path",
+            score_offset = 25,
+            fallbacks = { "snippets", "buffer" },
+            min_keyword_length = 2,
+            opts = {
+              trailing_slash = false,
+              label_trailing_slash = true,
+              get_cwd = function(context)
+                return vim.fn.expand(("#%d:p:h"):format(context.bufnr))
+              end,
+              show_hidden_files_by_default = true,
+            },
+          },
+          buffer = {
+            name = "Buffer",
+            enabled = true,
+            max_items = 3,
+            module = "blink.cmp.sources.buffer",
+            min_keyword_length = 2,
+            score_offset = 15, -- the higher the number, the higher the priority
+          },
+          snippets = {
+            name = "snippets",
+            enabled = true,
+            max_items = 15,
+            min_keyword_length = 2,
+            module = "blink.cmp.sources.snippets",
+            score_offset = 85, -- the higher the number, the higher the priority
+          },
+          --vimtex = {
+          --  name = "vimtex",
+          --  min_keyword_length = 2,
+          --  module = "blink.compat.source",
+          --  score_offset = 80,
+          --},
         },
       },
 

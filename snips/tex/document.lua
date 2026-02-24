@@ -8,11 +8,13 @@ local d = ls.dynamic_node
 local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
-local line_begin = require("luasnip.extras.expand_conditions").line_begin
-
+local line_begin = require("luasnip.extras.conditions.expand").line_begin
+local lb_show = function(line_to_cursor)
+  return line_to_cursor == 0
+end
 return {
   s(
-    { trig = "template", dscr = "Standard article template" },
+    { trig = "simple", dscr = "Standard article template" },
     fmta(
       [[
         \documentclass[a4paper]{article}
@@ -43,7 +45,7 @@ return {
     )
   ),
   s(
-    { trig = "template2", dscr = "Standard paper template" },
+    { trig = "paper", dscr = "Standard paper template" },
     fmta(
       [[
         \documentclass[a4paper,10pt,twocolumn]{article}
@@ -91,7 +93,8 @@ return {
         \end{document}
   ]],
       { i(1), rep(1), i(2), i(3), i(0) }
-    )
+    ),
+    { condition = line_begin, show_condition = lb_show }
   ),
   s(
     { trig = "hr", dscr = "The hyperref package's href{}{} command (for url links)" },
@@ -108,8 +111,8 @@ return {
         <>
         ]],
       { i(1), i(0) }
-    )
-    --    { condition = line_begin } -- set condition in the `opts` table
+    ),
+    { condition = line_begin } -- set condition in the `opts` table
   ),
   s(
     { trig = "sub", dscr = "Subsection" },
@@ -117,7 +120,7 @@ return {
       [[\subsection{<>}
     <>]],
       { i(1), i(0) }
-    )
-    --    { condition = line_begin } -- set condition in the `opts` table
+    ),
+    { condition = line_begin } -- set condition in the `opts` table
   ),
 }

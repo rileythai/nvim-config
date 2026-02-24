@@ -1,3 +1,4 @@
+_G.utils = require("config.utils")
 if vim.env.PROF then
   -- example for lazy.nvim
   -- change this to the correct path for your plugin manager
@@ -12,6 +13,7 @@ if vim.env.PROF then
   })
 end
 
+require("config.lsp")
 require("config.options")
 require("config.lazy")
 require("config.autocmds")

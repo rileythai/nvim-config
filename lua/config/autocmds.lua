@@ -112,3 +112,20 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.opt_local.foldtext = "vimtex#fold#text()"
   end,
 })
+
+-- commands to Enable/disable format on save
+vim.api.nvim_create_user_command("FormatToggle", function()
+  if vim.g.disable_autoformat then
+    -- FormatDisable! will disable formatting just for this buffer
+    vim.b.disable_autoformat = false
+    vim.g.disable_autoformat = false
+    vim.notify("Autoformatting on", 1)
+  else
+    vim.b.disable_autoformat = true
+    vim.g.disable_autoformat = true
+    vim.notify("Autoformatting off", 1)
+  end
+end, {
+  desc = "Toggle autoformat-on-save",
+  bang = true,
+})

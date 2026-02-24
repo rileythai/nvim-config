@@ -1,5 +1,4 @@
 return {
-  { "sindrets/diffview.nvim" },
   {
     "lewis6991/gitsigns.nvim",
     event = "VeryLazy",
@@ -84,14 +83,7 @@ return {
           map("n", "<leader>gH", gs.undo_stage_hunk, { desc = "Undo stage hunk" })
           map("n", "<leader>gB", function()
             gs.blame_line({ full = true })
-          end, { desc = "Show full blames" })
-          map("n", "<leader>gb", gs.toggle_current_line_blame, { desc = "Toggle Blame" })
-          map("n", "<leader>gd", function()
-            gs.diffthis(nil, { split = "rightbelow" })
-          end, { desc = "Show diff" })
-          map("n", "<leader>gD", function()
-            gs.diffthis("~", { split = "rightbelow" })
-          end, { desc = "Show diff vs. prev commit" })
+          end, { desc = "Show blame" })
           map("n", "<leader>gx", gs.toggle_deleted, { desc = "Toggle deleted lines" })
 
           -- Text object

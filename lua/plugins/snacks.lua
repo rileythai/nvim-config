@@ -1,131 +1,91 @@
-return {"folke/snacks.nvim",
+return {
+  "folke/snacks.nvim",
 
   priority = 1000,
   lazy = false,
   keys = {
-      -- I use this keymap with mini.files, but snacks explorer was taking over
-      -- https://github.com/folke/snacks.nvim/discussions/949
-      { "<leader>gg", function() Snacks.lazygit.open() end, desc="LazyGit" },
-      {
-        "<leader>fg",
-        function()
-          Snacks.picker.grep({
-            -- Exclude results from grep picker
-            -- I think these have to be specified in gitignore syntax
-            exclude = { "dictionaries/words.txt" },
-          })
-        end,
-        desc = "Grep",
-      },
-      -- Open git log in vertical view
-      {
-        "<leader>gl",
-        function()
-          Snacks.picker.git_log({
-            finder = "git_log",
-            format = "git_log",
-            preview = "git_show",
-            confirm = "git_checkout",
-            layout = "vertical",
-          })
-        end,
-        desc = "Git Log",
-      },
-      -- -- List git branches with Snacks_picker to quickly switch to a new branch
-      {
-        "<leader>gb",
-        function()
-          Snacks.picker.git_branches({
-            layout = "select",
-          })
-        end,
-        desc = "Branches",
-      },
-      -- Used in LazyVim to view the different keymaps, this by default is
-      -- configured as <leader>sk but I run it too often
-      -- Sometimes I need to see if a keymap is already taken or not
-      {
-        "<M-k>",
-        function()
-          Snacks.picker.keymaps({
-            layout = "vertical",
-          })
-        end,
-        desc = "Keymaps",
-      },
-      -- File picker
-      {
-        "<leader>ff",
-        function()
-          Snacks.picker.files({
-            finder = "files",
-            format = "file",
-            show_empty = true,
-            supports_live = true,
-            -- In case you want to override the layout for this keymap
-            -- layout = "vscode",
-          })
-        end,
-        desc = "Find Files",
-      },
-      {
-        "<leader><space>",
-        function()
-          Snacks.picker.files({
-            finder = "files",
-            format = "file",
-            show_empty = true,
-            supports_live = true,
-            -- In case you want to override the layout for this keymap
-            -- layout = "vscode",
-          })
-        end,
-        desc = "Find Files",
-      },
-      -- Navigate buffers
-      {
-        "<leader>fb",
-        function()
-          Snacks.picker.buffers({
-            on_show = function()
-              vim.cmd.stopinsert() -- normal init
-            end,
-            finder = "buffers",
-            format = "buffer",
-            hidden = false,
-            unloaded = true,
-            current = true,
-            sort_lastused = true,
-            win = {
-              input = {
-                keys = {
-                  ["d"] = "bufdelete",
-                },
-              },
-              list = { keys = { ["d"] = "bufdelete" } },
-            },
-            -- In case you want to override the layout for this keymap
-            -- layout = "ivy",
-          })
-        end,
-        desc = "Find buffer",
-      },
-    },
+    -- stylua: ignore start
+        -- Top Pickers & Explorer
+        { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+        { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
+        { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
+        { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+        { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
+        { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
+        -- find
+        { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
+        { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
+        { "<leader>ff", function() Snacks.picker.git_files() end, desc = "Find Files" },
+        { "<leader>fg", function() Snacks.picker.grep({ cmd = "ripgrep"}) end, desc = "Grep" },
+        { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
+        { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
+        -- git
+        { "<leader>gg", function() Snacks.lazygit.open() end, desc = "LazyGit" },
+        { "<leader>gb", function() Snacks.picker.git_branches({ layout = "select" }) end, desc = "Git Branches" },
+        { "<leader>gl", function() Snacks.picker.git_log({format = "git_log", preview = "git_show", confirm = "git_checkout", layout = "ivy_split"}) end, desc = "Git Log" },
+        { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
+        { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
+        { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
+        { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git diff (Hunks)" },
+        -- gh
+        { "<leader>gi", function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
+        { "<leader>gI", function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "GitHub Issues (all)" },
+        { "<leader>gp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
+        { "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
+        -- Grep
+        { "<leader>sb", function() Snacks.picker.lines({layout = "vscode"}) end, desc = "Search buffer" },
+        { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Search buffers (grep)" },
+        { "<leader>sg", function() Snacks.picker.grep() end, desc = "Search grep" },
+        { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
+        -- Search
+        { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
+        { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
+        { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
+        { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
+        { "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
+        { "<leader>sC", function() Snacks.picker.commands() end, desc = "Commands" },
+        { "<leader>sd", function() Snacks.picker.diagnostics_buffer() end, desc = "Diagnostics" },
+        { "<leader>sD", function() Snacks.picker.diagnostics() end, desc = "Diagnostics (All)" },
+        { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
+        { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons" },
+        { "<leader>sj", function() Snacks.picker.jumps() end, desc = "Jumps" },
+        { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
+        { "<leader>sl", function() Snacks.picker.loclist() end, desc = "Location List" },
+        { "<leader>sm", function() Snacks.picker.marks() end, desc = "Marks" },
+        { "<leader>sM", function() Snacks.picker.man() end, desc = "Man Pages" },
+        { "<leader>sp", function() Snacks.picker.lazy() end, desc = "Search for Plugin Spec" },
+        { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
+        { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
+        { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
+        -- (g) LSP
+        { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
+        { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
+        { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+        { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+        { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
+        { "gai", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming" },
+        { "gao", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing" },
+        { "<leader>O", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+        { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+        { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
+  },
+  -- stylua: ignore end
   ---@type snacks.Config
   opts = {
     -- disable useless stuff
     bigfile = { enabled = true },
-    explorer = { enabled = false },
-    indent = { enabled = false },
-    input = { enabled = false },
-    notifier = { enabled = false },
-    quickfile = { enabled = false },
-    scope = { enabled = false },
-    scroll = { enabled = true },
+    bufdelete = { enabled = true },
+    explorer = { enabled = true }, -- explorer
+    indent = { enabled = true },
+    input = { enabled = true }, -- noice cmd line
+    notifier = { enabled = true }, -- notifications
+    notify = { enabled = true }, -- notifications
+    quickfile = { enabled = true },
+    scope = { enabled = true },
+    scroll = { enabled = false },
     statuscolumn = { enabled = true },
     words = { enabled = false },
-    -- Documentation for the picker
-    -- https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
+    -- file picker cfg's
     picker = {
       debug = {
         scores = false, -- show scores in the list
@@ -153,8 +113,7 @@ return {"folke/snacks.nvim",
             },
           },
         },
-        -- I wanted to modify the layout width
-        --
+        -- modified layout width
         vertical = {
           layout = {
             backdrop = false,
@@ -196,14 +155,8 @@ return {"folke/snacks.nvim",
       theme = {
         selectedLineBgColor = { bg = "CursorLine" },
       },
-      -- With this I make lazygit to use the entire screen, because by default there's
+      -- With this I make lazygit to use the entire screen
       win = {
-        -- -- The first option was to use the "dashboard" style, which uses a
-        -- -- 0 height and width, see the styles documentation
-        -- -- https://github.com/folke/snacks.nvim/blob/main/docs/styles.md
-        -- style = "dashboard",
-        -- But I can also explicitly set them, which also works, what the best
-        -- way is? Who knows, but it works
         width = 0,
         height = 0,
       },
@@ -212,23 +165,12 @@ return {"folke/snacks.nvim",
     image = {
       enabled = true,
       doc = {
-        -- Personally I set this to false, I don't want to render all the
-        -- images in the file, only when I hover over them
-        -- render the image inline in the buffer
-        -- if your env doesn't support unicode placeholders, this will be disabled
-        -- takes precedence over `opts.float` on supported terminals
         inline = vim.g.neovim_mode == "skitty" and true or false,
         -- only_render_image_at_cursor = vim.g.neovim_mode == "skitty" and false or true,
-        -- render the image in a floating window
-        -- only used if `opts.inline` is disabled
-        float = true,
+        float = true, -- render the image in a floating window
         -- Sets the size of the image
-        -- max_width = 60,
-        -- max_width = vim.g.neovim_mode == "skitty" and 20 or 60,
-        -- max_height = vim.g.neovim_mode == "skitty" and 10 or 30,
         max_width = vim.g.neovim_mode == "skitty" and 5 or 60,
         max_height = vim.g.neovim_mode == "skitty" and 2.5 or 30,
-        -- max_height = 30,
         -- Where are the cached images stored?
         -- This path is found in the docs
         -- :lua print(vim.fn.stdpath("cache") .. "/snacks/image")
@@ -242,8 +184,7 @@ return {"folke/snacks.nvim",
           { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
           { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
           { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
-          { icon = " ", key = "s", desc = "Restore Session", section = "session" },
-          { icon = "󰒲 ", key = "L", desc = "Plugins", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+          { icon = "󰒲 ", key = "l", desc = "Plugins", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
           { icon = " ", key = "q", desc = "Quit", action = ":qa!" },
         },
       },

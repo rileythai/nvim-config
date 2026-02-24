@@ -8,9 +8,10 @@ local d = ls.dynamic_node
 local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
-local conds = require("luasnip.extras.expand_conditions")
-
-local line_begin = require("luasnip.extras.expand_conditions").line_begin
+local line_begin = require("luasnip.extras.conditions.expand").line_begin
+local lb_show = function(line_to_cursor)
+  return line_to_cursor == 0
+end
 
 -- mathzone check via vimtex
 local function math()
@@ -91,39 +92,43 @@ return {
     { t("\\mathrm{d}") },
     { condition = math, show_condition = math }
   ),
-
-  --s(
-  --  {
-  --    trig = "([bBpvV])mat(%d+)x(%d+)([ar])",
-  --    regTrig = true,
-  --    name = "matrix",
-  --    dscr = "matrix trigger lets go",
-  --    hidden = true,
-  --    priority = 100,
-  --  },
-  --  fmt(
-  --    [[
-  --  \begin{<>}<>
-  --  <>
-  --  \end{<>}]],
-  --    {
-  --      f(function(_, snip)
-  --        return snip.captures[1] .. "matrix" -- captures matrix type
-  --      end),
-  --      f(function(_, snip)
-  --        if snip.captures[4] == "a" then
-  --          out = string.rep("c", tonumber(snip.captures[3]) - 1) -- array for augment
-  --          return "[" .. out .. "|c]"
-  --        end
-  --        return "" -- otherwise return nothing
-  --      end),
-  --      d(1, mat),
-  --      f(function(_, snip)
-  --        return snip.captures[1] .. "matrix" -- i think i could probably use a repeat node but whatever
-  --      end),
-  --    },
-  --    { delimiters = "<>" }
-  --  ),
-  --  { condition = math, show_condition = math }
-  --),
+  s(
+    { trig = "sun", dscr = "solar dot", snippetType = "autosnippet", wordTrig = false },
+    { t("_{\\odot}") },
+    { condition = math, show_condition = math }
+  ),
 }
+--s(
+--  {
+--    trig = "([bBpvV])mat(%d+)x(%d+)([ar])",
+--    regTrig = true,
+--    name = "matrix",
+--    dscr = "matrix trigger lets go",
+--    hidden = true,
+--    priority = 100,
+--  },
+--  fmt(
+--    [[
+--  \begin{<>}<>
+--  <>
+--  \end{<>}]],
+--    {
+--      f(function(_, snip)
+--        return snip.captures[1] .. "matrix" -- captures matrix type
+--      end),
+--      f(function(_, snip)
+--        if snip.captures[4] == "a" then
+--          out = string.rep("c", tonumber(snip.captures[3]) - 1) -- array for augment
+--          return "[" .. out .. "|c]"
+--        end
+--        return "" -- otherwise return nothing
+--      end),
+--      d(1, mat),
+--      f(function(_, snip)
+--        return snip.captures[1] .. "matrix" -- i think i could probably use a repeat node but whatever
+--      end),
+--    },
+--    { delimiters = "<>" }
+--  ),
+--  { condition = math, show_condition = math }
+--),
